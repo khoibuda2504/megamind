@@ -96,3 +96,9 @@ button:focus-visible {
   opacity: 1;
   transform: translateX(0);
 }
+
+.ui-checkbox .ant-checkbox {
+  align-self: flex-start;
+  position: relative;
+  top: 6px;
+}
