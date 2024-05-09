@@ -1,2 +1,2 @@
 export { default as LoginPage } from "./Login";
-export { default as PolicyPage } from "./Policy";
+export { default as ProductPage } from "./Product";

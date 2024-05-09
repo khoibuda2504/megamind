@@ -1,11 +1,11 @@
-import { PolicyPage } from "@/pages";
+import { ProductPage } from "@/pages";
 import * as PATH from "@/configs/routesConfig";
 
-const ProductBuildRoute = [
+const productBuildRoute = [
   {
-    path: PATH.POLICY_PATH,
-    element: PolicyPage,
+    path: PATH.PRODUCT_PATH,
+    element: ProductPage,
   },
 ];
 
-export default ProductBuildRoute;
+export default productBuildRoute;

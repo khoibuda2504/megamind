@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
-
+import { Button, Layout, Menu } from "antd";
+import { useNavigate } from "react-router-dom";
+import * as PATH from "@/configs/routesConfig";
 const { Header, Sider, Content } = Layout;
 
 const NavBarMenu = ({ children }: { children: React.ReactNode }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
+  const navigate = useNavigate();
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+    <Layout className="min-h-screen">
+      <Sider trigger={null} collapsible collapsed={collapsed} width={250}>
         <Menu
           theme="dark"
           mode="inline"
@@ -20,21 +18,60 @@ const NavBarMenu = ({ children }: { children: React.ReactNode }) => {
           items={[
             {
               key: "1",
-              label: "Policy",
+              label: "Admin Management",
+              children: [
+                {
+                  key: "1-1",
+                  label: "User Management",
+                  disabled: true,
+                },
+                {
+                  key: "1-2",
+                  label: "Role Management",
+                  disabled: true,
+                },
+                {
+                  key: "1-3",
+                  label: "Organization Management",
+                  disabled: true,
+                },
+              ],
             },
             {
               key: "2",
-              label: "Retail",
+              label: "Product builder",
+              children: [
+                {
+                  key: "2-1",
+                  label: (
+                    <span onClick={() => navigate(PATH.PRODUCT_PATH)}>
+                      Products
+                    </span>
+                  ),
+                },
+              ],
             },
             {
               key: "3",
-              label: "Log out",
+              label: "Retail agency",
+              children: [
+                {
+                  key: "3-1",
+                  label: "Manage organization",
+                  disabled: true,
+                },
+                {
+                  key: "3-2",
+                  label: "Construct & Manage Policies",
+                  disabled: true,
+                },
+              ],
             },
           ]}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header className="bg-white p-0">
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -47,13 +84,7 @@ const NavBarMenu = ({ children }: { children: React.ReactNode }) => {
           />
         </Header>
         <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
+          className="p-5 m-5 rounded-lg bg-[#F0F2F5]"
         >
           {children}
         </Content>
