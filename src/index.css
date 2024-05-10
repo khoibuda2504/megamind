@@ -102,3 +102,6 @@ button:focus-visible {
   position: relative;
   top: 6px;
 }
+.primary-title {
+  @apply font-bold mb-2
+}

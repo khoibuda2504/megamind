@@ -1,5 +1,5 @@
 import { Button, Steps } from "antd";
-import { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 interface StepProcessProps {
   steps: Record<string, string | React.ReactNode>[];
@@ -7,7 +7,9 @@ interface StepProcessProps {
 
 const StepProcess = ({ steps }: StepProcessProps) => {
   const [current, setCurrent] = useState(0);
-  const items = steps.map((item) => ({ key: item.title, title: item.title }));
+  const items = useMemo(() => {
+    return steps.map((item) => ({ key: item.title, title: item.title }));
+  }, [steps.length]);
 
   const next = () => {
     setCurrent(current + 1);
@@ -26,7 +28,11 @@ const StepProcess = ({ steps }: StepProcessProps) => {
             Next
           </Button>
         )}
-        {current === steps.length - 1 && <Button type="primary">Done</Button>}
+        {current === steps.length - 1 && (
+          <Button type="primary" htmlType="submit">
+            Done
+          </Button>
+        )}
         {current > 0 && (
           <Button className="mx-2" onClick={() => prev()}>
             Previous
@@ -37,4 +43,4 @@ const StepProcess = ({ steps }: StepProcessProps) => {
   );
 };
 
-export default StepProcess;
+export default React.memo(StepProcess);

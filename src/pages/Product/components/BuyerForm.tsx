@@ -1,7 +1,6 @@
-import { InputFloat } from "@/components/Input";
-import { SelectFloat } from "@/components/Select";
+import { FieldFloat } from "@/components";
 import { genderList } from "@/constants";
-import { Col, Row } from "antd";
+import { Col, Input, Row, Select } from "antd";
 
 const BuyerForm = () => {
   return (
@@ -9,25 +8,39 @@ const BuyerForm = () => {
       <h4>General Information</h4>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={8}>
-          <InputFloat textFloat="Full name" />
+          <FieldFloat textFloat="Full name">
+            <Input />
+          </FieldFloat>
         </Col>
         <Col xs={24} md={8}>
-          <InputFloat textFloat="Date of Birth" />
+          <FieldFloat textFloat="Date of Birth">
+            <Input />
+          </FieldFloat>
         </Col>
         <Col xs={24} md={8}>
-          <SelectFloat options={genderList} />
+          <FieldFloat textFloat="Date of Birth">
+            <Select options={genderList} />
+          </FieldFloat>
         </Col>
         <Col xs={24} md={8}>
-          <InputFloat textFloat="ID/Passport Number" />
+          <FieldFloat textFloat="ID/Passport Number">
+            <Input />
+          </FieldFloat>
         </Col>
         <Col xs={24} md={8}>
-          <InputFloat textFloat="Date of Issue" />
+          <FieldFloat textFloat="Date of Issue">
+            <Input />
+          </FieldFloat>
         </Col>
         <Col xs={24} md={8}>
-          <InputFloat textFloat="Place of Issue" />
+          <FieldFloat textFloat="Place of Issue">
+            <Input />
+          </FieldFloat>
         </Col>
         <Col xs={24}>
-          <InputFloat textFloat="Address" />
+          <FieldFloat textFloat="Address">
+            <Input />
+          </FieldFloat>
         </Col>
       </Row>
     </div>

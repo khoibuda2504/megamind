@@ -2,17 +2,18 @@ import {
   Button,
   Card,
   Col,
+  Input,
   Row,
   Space,
   Typography,
 } from "antd";
-import { InputFloat } from "@/components/Input";
 import PolicyTable from "./components/PolicyTable";
 import BuyerForm from "./components/BuyerForm";
 import { useModalStore } from "@/store";
 import PolicyForm from "./components/PolicyForm";
 import StepProcess from "@/components/StepProcess";
 import { parseCurrency } from "@/utilities/helpers";
+import { FieldFloat } from "@/components";
 
 const { Text } = Typography;
 
@@ -25,7 +26,9 @@ const Product = () => {
       content: (
         <div>
           <Space className="flex justify-end mb-4">
-            <InputFloat width="250px" />
+            <FieldFloat textFloat="Search">
+              <Input />
+            </FieldFloat>
             <Button
               type="primary"
               onClick={() => {
@@ -54,10 +57,10 @@ const Product = () => {
 
   return (
     <Row gutter={[50, 50]}>
-      <Col xs={24} md={19}>
+      <Col xs={24} md={17}>
         <StepProcess steps={steps} />
       </Col>
-      <Col xs={6} md={5}>
+      <Col xs={6} md={7}>
         <Card title="Summary">
           <p>
             <Text strong>Creation Date: </Text>

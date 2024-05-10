@@ -76,7 +76,7 @@ const PolicyTable = () => {
       render: (v: number) => parseCurrency(v),
     },
   ];
-  return <Table dataSource={dataSource} columns={columns} pagination={false} />;
+  return <Table rowKey="id" dataSource={dataSource} columns={columns} pagination={false} />;
 };
 
 export default PolicyTable;

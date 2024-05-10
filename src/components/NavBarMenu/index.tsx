@@ -84,7 +84,7 @@ const NavBarMenu = ({ children }: { children: React.ReactNode }) => {
           />
         </Header>
         <Content
-          className="p-5 m-5 rounded-lg bg-[#F0F2F5]"
+          className="p-5 m-5 rounded-lg bg-white"
         >
           {children}
         </Content>
