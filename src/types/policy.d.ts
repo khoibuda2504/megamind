@@ -1,13 +1,26 @@
-export type Policy = {
-  id: string;
+type GeneralType = {
   fullName: string;
-  idNumber: number;
+  dateOfBirth: string;
   gender: string;
-  relationship: string;
-  package: string;
+  idNumber: number;
+  dateOfIssue: string;
+  placeOfIssue: string;
+};
+type BuyerType = {
+  address: string
+} & GeneralType
+export type PolicyType = GeneralType & {
+  id: string;
   age: number;
-  address: string;
-  fee: number;
+  relationship: string;
+  insurancePackage: string;
   startDate: string;
   endDate: string;
+  outPatient: boolean;
+  dental: boolean;
+  fee: number
 };
+export type ProductType =  {
+  policies: PolicyType[],
+  buyerInfo: BuyerType
+}

@@ -1,24 +1,8 @@
-import { Policy } from "@/types/policy";
+import { PolicyType } from "@/types/policy";
 import { parseCurrency, parseUTC } from "@/utilities/helpers";
 import { Table } from "antd";
 
-const PolicyTable = () => {
-  const dataSource = [
-    {
-      id: "1",
-      fullName: "Mike",
-      idNumber: 6781212837,
-      gender: "Male",
-      relationship: "Self",
-      package: "Golden",
-      age: 32,
-      address: "10 Downing Street",
-      fee: 500,
-      startDate: "2024-04-02T04:49:56.623Z",
-      endDate: "2024-04-02T04:49:56.623Z",
-    },
-  ];
-
+const PolicyTable = ({ policies }: { policies: PolicyType[] }) => {
   const columns = [
     {
       title: "No.",
@@ -54,8 +38,8 @@ const PolicyTable = () => {
     },
     {
       title: "Package",
-      dataIndex: "package",
-      key: "package",
+      dataIndex: "insurancePackage",
+      key: "insurancePackage",
     },
     {
       title: "Start Date",
@@ -76,7 +60,14 @@ const PolicyTable = () => {
       render: (v: number) => parseCurrency(v),
     },
   ];
-  return <Table rowKey="id" dataSource={dataSource} columns={columns} pagination={false} />;
+  return (
+    <Table
+      rowKey="id"
+      dataSource={policies}
+      columns={columns}
+      pagination={false}
+    />
+  );
 };
 
 export default PolicyTable;

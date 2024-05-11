@@ -36,3 +36,8 @@ export const insurancePackageList = [
     value: "Bronze",
   }
 ]
+export const mapPackage = {
+  "Golden": 500,
+  "Silver": 300,
+  "Bronze": 150
+}

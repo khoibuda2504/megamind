@@ -24,7 +24,7 @@ function useLocalStorage<T>(
   useEffect(() => {
     if (window.localStorage) {
       const item = localStorage.getItem(key);
-      if (typeof item !== "undefined") {
+      if (item !== null) {
         try {
           setStoredValue(JSON.parse(item as string));
         } catch (error) {

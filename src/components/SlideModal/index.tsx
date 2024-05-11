@@ -2,7 +2,7 @@ import { useModalStore } from "@/store";
 import { Modal } from "antd";
 
 const SlideModal = () => {
-  const { isModalOpen, content, setIsModalOpen } = useModalStore();
+  const { isModalOpen, content, closeModal } = useModalStore();
   return (
     <Modal
       open={isModalOpen}
@@ -18,11 +18,11 @@ const SlideModal = () => {
           height: "100vh",
         },
         body: {
-          paddingTop: '30px'
-        }
+          paddingTop: "30px",
+        },
       }}
       width="80%"
-      onCancel={() => setIsModalOpen(false)}
+      onCancel={() => closeModal()}
     >
       {content}
     </Modal>

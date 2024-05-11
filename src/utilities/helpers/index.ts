@@ -8,8 +8,9 @@ export const parseUTC = (date: string, format = null) => {
   if (!date) return "";
   return moment(date).format(format ?? formattedDate);
 };
-export const isUnderSixteen = (birthDate: moment.MomentInput): boolean => {
+export const calculateAge = (birthDate: Date): number => {
+  const dob = moment(birthDate);
   const today = moment();
-  const sixteenYearsAgo = today.subtract(16, "years");
-  return (birthDate as moment.Moment).isAfter(sixteenYearsAgo);
+  const age = today.diff(dob, "years");
+  return age;
 };

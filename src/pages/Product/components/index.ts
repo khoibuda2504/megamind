@@ -1,0 +1,1 @@
+export {default as renderGeneralInfo} from './renderGeneralInfo'
