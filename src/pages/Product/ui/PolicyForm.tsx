@@ -1,34 +1,43 @@
 import { UICheckbox } from "@/components/Checkbox";
 import StepProcess from "@/components/StepProcess";
 import { parseCurrency } from "@/utilities/helpers";
-import { Card, Col, DatePicker, Row, Select } from "antd";
-import { relationshipList, insurancePackageList } from "@/constants";
+import { Card, Checkbox, Col, DatePicker, Row, Select } from "antd";
+import { relationshipList, insurancePackageList } from "@/utilities/constants";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ControllerField } from "@/components";
 import { renderGeneralInfo } from "../components";
-import { PolicyType, ProductType } from "@/types/policy";
-import { handleCreatePolicy } from "../services/Policy";
+import { PolicyType } from "@/types/policy";
+import { mapData } from "../services/Policy";
 import { useModalStore } from "@/store";
 
 interface IPolicyForm {
-  setProduct: React.Dispatch<React.SetStateAction<ProductType>>;
+  onResponse: (data: PolicyType) => void;
+  isEdit?: boolean;
+  isDetail?: boolean;
+  initialData?: PolicyType;
 }
 
-const PolicyForm = ({ setProduct }: IPolicyForm) => {
+const PolicyForm = ({
+  onResponse,
+  isDetail = false,
+  isEdit = false,
+  initialData,
+}: IPolicyForm) => {
   const {
     handleSubmit,
     control,
     formState: { isValid },
   } = useForm<PolicyType>({
     mode: "onBlur",
+    ...(isDetail || isEdit
+      ? {
+          defaultValues: initialData,
+        }
+      : {}),
   });
   const { closeModal } = useModalStore();
   const onSubmit: SubmitHandler<PolicyType> = (data) => {
-    const res = handleCreatePolicy(data);
-    setProduct((prev) => ({
-      ...prev,
-      policies: [...(prev.policies ?? []), res],
-    }));
+    onResponse(mapData(data, isEdit));
     closeModal();
   };
   const steps = [
@@ -60,7 +69,7 @@ const PolicyForm = ({ setProduct }: IPolicyForm) => {
       title: "Insurance Package",
       content: (
         <Card>
-          <h4 className="font-bold">General Information</h4>
+          <h4 className="primary-title mt-2">General Information</h4>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={8}>
               <ControllerField
@@ -82,9 +91,7 @@ const PolicyForm = ({ setProduct }: IPolicyForm) => {
                 label="Start Date"
                 rules={{ required: true }}
                 component={DatePicker}
-                componentProps={{
-                  className: "w-full",
-                }}
+                componentProps={{ className: "w-full", isDate: true }}
               />
             </Col>
             <Col xs={24} md={8}>
@@ -94,34 +101,36 @@ const PolicyForm = ({ setProduct }: IPolicyForm) => {
                 label="End Date"
                 rules={{ required: true }}
                 component={DatePicker}
-                componentProps={{
-                  className: "w-full",
-                }}
+                componentProps={{ className: "w-full", isDate: true }}
               />
             </Col>
           </Row>
-          <h4>Mandatory Insurance Benefits</h4>
-          <UICheckbox className="mb-3" disabled checked>
+          <h4 className="primary-title mt-2">Mandatory Insurance Benefits</h4>
+          <UICheckbox className="mb-3">
             <p>Death and permanent total disability due to accident/year.</p>
             <p>Insurance amount: {parseCurrency(50000)}</p>
           </UICheckbox>
-          <UICheckbox className="mb-3" disabled checked>
+          <UICheckbox className="mb-3">
             <p>Death and permanent total disability due to disease/year.</p>
             <p>Insurance amount: {parseCurrency(50000)}</p>
           </UICheckbox>
-          <UICheckbox className="mb-3" disabled checked>
+          <UICheckbox className="mb-3">
             <p>Medical expenses due to accidents/year</p>
             <p>Insurance amount: {parseCurrency(10000)}</p>
           </UICheckbox>
-          <UICheckbox disabled checked>
+          <UICheckbox>
             <p>Medical expenses due to accidents/year</p>
             <p>Insurance amount: {parseCurrency(10000)}</p>
           </UICheckbox>
-          <h4 className="mt-4">Additional Insurance Benefits</h4>
+          <h4 className="primary-title mt-2">Additional Insurance Benefits</h4>
           <ControllerField
             control={control}
             name="outPatient"
-            component={UICheckbox}
+            component={Checkbox}
+            componentProps={{
+              isCheckbox: true,
+              rootClassName: "ui-checkbox",
+            }}
           >
             <p>Outpatient treatment/year (+{parseCurrency(100)})</p>
             <p>Insurance amount: {parseCurrency(20000)}</p>
@@ -129,7 +138,11 @@ const PolicyForm = ({ setProduct }: IPolicyForm) => {
           <ControllerField
             control={control}
             name="dental"
-            component={UICheckbox}
+            component={Checkbox}
+            componentProps={{
+              isCheckbox: true,
+              rootClassName: "ui-checkbox",
+            }}
           >
             <p>Dental examination and treatment/year (+{parseCurrency(75)})</p>
             <p>Insurance amount: {parseCurrency(15000)}</p>

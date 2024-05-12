@@ -1,6 +1,7 @@
 import React from "react";
 import { Control, useController } from "react-hook-form";
 import FieldFloat from "../FieldFloat";
+import moment from "moment";
 
 interface ControllerProps {
   control: Control<any, any>;
@@ -19,7 +20,7 @@ const ControllerField: React.FC<ControllerProps> = ({
   rules,
   component: Component,
   componentProps = {},
-  children
+  children,
 }) => {
   const {
     field,
@@ -29,10 +30,20 @@ const ControllerField: React.FC<ControllerProps> = ({
     name,
     rules,
   });
-
+  const finalField = {
+    ...field,
+    ...(componentProps.isDate
+      ? { value: field.value ? moment(field.value) : undefined }
+      : {}),
+    ...(componentProps.isCheckbox ? { checked: field.value } : {}),
+  };
   return (
-    <FieldFloat textFloat={label ?? ''}>
-      <Component {...field} {...componentProps} status={error ? "error" : ""}>
+    <FieldFloat textFloat={label ?? ""}>
+      <Component
+        {...finalField}
+        {...componentProps}
+        status={error ? "error" : ""}
+      >
         {children}
       </Component>
     </FieldFloat>

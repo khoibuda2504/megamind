@@ -1,5 +1,5 @@
 import { ControllerField } from "@/components";
-import { genderList } from "@/constants";
+import { genderList } from "@/utilities/constants";
 import { Col, DatePicker, Input, Select } from "antd";
 import { Control, FieldValues } from "react-hook-form";
 
@@ -22,7 +22,10 @@ const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
           label="Date of Birth"
           rules={{ required: true }}
           component={DatePicker}
-          componentProps={{ className: "w-full" }}
+          componentProps={{
+            className: "w-full",
+            isDate: true,
+          }}
         />
       </Col>
       <Col xs={24} md={8}>
@@ -54,7 +57,7 @@ const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
           label="Date of Issue"
           rules={{ required: true }}
           component={DatePicker}
-          componentProps={{ className: "w-full" }}
+          componentProps={{ className: "w-full", isDate: true }}
         />
       </Col>
       <Col xs={24} md={8}>

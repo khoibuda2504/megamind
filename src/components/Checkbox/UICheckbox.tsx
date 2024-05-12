@@ -3,14 +3,12 @@ import { Checkbox } from "antd";
 interface UICheckboxProps {
   children: React.ReactNode;
   className?: string;
-  disabled?: boolean;
-  checked?: boolean;
 }
 
-const UICheckbox = ({ children, className, ...rest }: UICheckboxProps) => {
+const UICheckbox = ({ children, className }: UICheckboxProps) => {
   return (
     <div className={className}>
-      <Checkbox rootClassName="ui-checkbox" {...rest}>
+      <Checkbox rootClassName="ui-checkbox" disabled checked>
         {children}
       </Checkbox>
     </div>

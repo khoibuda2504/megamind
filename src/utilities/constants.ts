@@ -41,3 +41,18 @@ export const mapPackage = {
   "Silver": 300,
   "Bronze": 150
 }
+
+export enum Gender {
+  Male = "Male",
+  Female = "Female",
+}
+export enum Relationship {
+  Self = "Self",
+  Spouse = "Spouse",
+  Children = "Children"
+}
+export enum InsurancePackage {
+  Golden = "Golden",
+  Silver = "Silver",
+  Bronze = "Bronze"
+}

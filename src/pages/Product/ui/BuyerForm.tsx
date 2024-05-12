@@ -5,7 +5,7 @@ import { renderGeneralInfo } from "../components";
 const BuyerForm = ({ control }: any) => {
   return (
     <div>
-      <h4>General Information</h4>
+      <h4 className="primary-title">General Information</h4>
       <Row gutter={[16, 16]}>
         {renderGeneralInfo(control)}
         <Col xs={24}>
