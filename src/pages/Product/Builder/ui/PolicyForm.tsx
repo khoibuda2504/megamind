@@ -11,7 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ControllerField } from "@/components";
 import { renderGeneralInfo } from "../components";
 import { PolicyType } from "../types";
-import { mapData } from "../services/Policy";
+import { mapData } from "../mapData"
 import { useModalStore } from "@/store";
 
 interface IPolicyForm {

@@ -1,5 +1,5 @@
 import { mapPackage } from "@/utilities/constants";
-import { PolicyType } from "../types";
+import { PolicyType } from "./types";
 import { calculateAge } from "@/utilities/helpers";
 import { v4 as uuid } from "uuid";
 export const mapData = (data: PolicyType, isEdit: boolean): PolicyType => {

@@ -1,2 +1,2 @@
-export { default as LoginPage } from "./Login";
-export { default as ProductPage } from "./Product";
+export { default as LoginPage } from "./Authenticate";
+export { default as ProductPage } from "./Product/Builder";

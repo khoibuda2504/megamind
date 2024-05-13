@@ -39,14 +39,14 @@ const NavBarMenu = ({ children }: { children: React.ReactNode }) => {
             },
             {
               key: "2",
-              label: "Product builder",
+              label: "Product",
               children: [
                 {
                   key: "2-1",
                   label: (
-                    <span onClick={() => navigate(PATH.PRODUCT_PATH)}>
-                      Products
-                    </span>
+                    <div onClick={() => navigate(PATH.PRODUCT_BUILDER_PATH)}>
+                      Builder
+                    </div>
                   ),
                 },
               ],
