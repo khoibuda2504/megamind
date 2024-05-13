@@ -15,7 +15,7 @@ const BuyerForm = ({
     <div>
       <h4 className="primary-title">General Information</h4>
       <Row gutter={[16, 16]}>
-        {renderGeneralInfo<BuyerType>(control, isDetail)}
+        {renderGeneralInfo(control, isDetail)}
         <Col xs={24}>
           <ControllerField
             control={control}

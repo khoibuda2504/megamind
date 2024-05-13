@@ -1,14 +1,15 @@
 import { formattedDate } from "@/configs";
-import dayjs, { Dayjs } from "dayjs";
+import { DateType } from "@/types/Date";
+import dayjs from "dayjs";
 
 export const parseCurrency = (value: number = 0) => {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
 };
-export const parseUTC = (date: Dayjs, format = null) => {
+export const parseUTC = (date: DateType, format = null) => {
   if (!date) return "";
   return dayjs(date).format(format ?? formattedDate);
 };
-export const calculateAge = (birthDate: Dayjs): number => {
+export const calculateAge = (birthDate: DateType): number => {
   const today = dayjs();
   const birthYear = dayjs(birthDate).year();
   const currentYear = today.year();
