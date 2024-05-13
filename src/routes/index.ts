@@ -1,1 +1,1 @@
-export { default as productBuildRoute } from "./productBuildRoute";
+export { default as ProductBuildRoute } from "./ProductBuildRoute";

@@ -1,11 +1,11 @@
 import { ProductPage } from "@/pages";
 import * as PATH from "@/configs/routesConfig";
 
-const productBuildRoute = [
+const ProductBuildRoute = [
   {
     path: PATH.PRODUCT_PATH,
     element: ProductPage,
   },
 ];
 
-export default productBuildRoute;
+export default ProductBuildRoute;
