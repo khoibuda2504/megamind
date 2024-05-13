@@ -41,6 +41,10 @@ export const mapPackage = {
   "Silver": 300,
   "Bronze": 150
 }
+export enum FieldType {
+  DATE= "DATE",
+  CHECKBOX= "CHECKBOX"
+}
 
 export enum Gender {
   Male = "Male",

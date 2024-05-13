@@ -1,19 +1,21 @@
 import React from "react";
 import { Control, useController } from "react-hook-form";
 import FieldFloat from "../FieldFloat";
-import moment from "moment";
+import dayjs from "dayjs";
+import { FieldType } from "@/utilities/constants";
 
-interface ControllerProps {
+interface IControllerProps {
   control: Control<any, any>;
   name: string;
   label?: string;
-  rules?: any;
+  rules?: { [key: string]: any };
   component: React.ComponentType<any>;
   componentProps?: { [key: string]: any };
   children?: React.ReactNode;
+  fieldType?: FieldType;
 }
 
-const ControllerField: React.FC<ControllerProps> = ({
+const ControllerField: React.FC<IControllerProps> = ({
   control,
   name,
   label,
@@ -21,6 +23,7 @@ const ControllerField: React.FC<ControllerProps> = ({
   component: Component,
   componentProps = {},
   children,
+  fieldType,
 }) => {
   const {
     field,
@@ -32,10 +35,10 @@ const ControllerField: React.FC<ControllerProps> = ({
   });
   const finalField = {
     ...field,
-    ...(componentProps.isDate
-      ? { value: field.value ? moment(field.value) : undefined }
+    ...(fieldType === FieldType.DATE
+      ? { value: field.value ? dayjs(field.value) : null }
       : {}),
-    ...(componentProps.isCheckbox ? { checked: field.value } : {}),
+    ...(fieldType === FieldType.CHECKBOX ? { checked: field.value } : {}),
   };
   return (
     <FieldFloat textFloat={label ?? ""}>

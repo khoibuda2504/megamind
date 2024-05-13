@@ -2,11 +2,15 @@ import { UICheckbox } from "@/components/Checkbox";
 import StepProcess from "@/components/StepProcess";
 import { parseCurrency } from "@/utilities/helpers";
 import { Card, Checkbox, Col, DatePicker, Row, Select } from "antd";
-import { relationshipList, insurancePackageList } from "@/utilities/constants";
+import {
+  relationshipList,
+  insurancePackageList,
+  FieldType,
+} from "@/utilities/constants";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ControllerField } from "@/components";
 import { renderGeneralInfo } from "../components";
-import { PolicyType } from "@/types/policy";
+import { PolicyType } from "../types";
 import { mapData } from "../services/Policy";
 import { useModalStore } from "@/store";
 
@@ -47,7 +51,7 @@ const PolicyForm = ({
         <Card>
           <h4 className="primary-title">General Information</h4>
           <Row gutter={[16, 16]}>
-            {renderGeneralInfo(control)}
+            {renderGeneralInfo(control, isDetail)}
             <Col xs={24} md={8}>
               <ControllerField
                 control={control}
@@ -58,6 +62,7 @@ const PolicyForm = ({
                 componentProps={{
                   className: "w-full",
                   options: relationshipList,
+                  disabled: isDetail,
                 }}
               />
             </Col>
@@ -80,6 +85,7 @@ const PolicyForm = ({
                 component={Select}
                 componentProps={{
                   className: "w-full",
+                  disabled: isDetail,
                   options: insurancePackageList,
                 }}
               />
@@ -91,7 +97,11 @@ const PolicyForm = ({
                 label="Start Date"
                 rules={{ required: true }}
                 component={DatePicker}
-                componentProps={{ className: "w-full", isDate: true }}
+                fieldType={FieldType.DATE}
+                componentProps={{
+                  className: "w-full",
+                  disabled: isDetail,
+                }}
               />
             </Col>
             <Col xs={24} md={8}>
@@ -101,7 +111,11 @@ const PolicyForm = ({
                 label="End Date"
                 rules={{ required: true }}
                 component={DatePicker}
-                componentProps={{ className: "w-full", isDate: true }}
+                fieldType={FieldType.DATE}
+                componentProps={{
+                  className: "w-full",
+                  disabled: isDetail,
+                }}
               />
             </Col>
           </Row>
@@ -127,9 +141,10 @@ const PolicyForm = ({
             control={control}
             name="outPatient"
             component={Checkbox}
+            fieldType={FieldType.CHECKBOX}
             componentProps={{
-              isCheckbox: true,
               rootClassName: "ui-checkbox",
+              disabled: isDetail,
             }}
           >
             <p>Outpatient treatment/year (+{parseCurrency(100)})</p>
@@ -139,9 +154,10 @@ const PolicyForm = ({
             control={control}
             name="dental"
             component={Checkbox}
+            fieldType={FieldType.CHECKBOX}
             componentProps={{
-              isCheckbox: true,
               rootClassName: "ui-checkbox",
+              disabled: isDetail,
             }}
           >
             <p>Dental examination and treatment/year (+{parseCurrency(75)})</p>
@@ -153,7 +169,12 @@ const PolicyForm = ({
   ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <StepProcess steps={steps} isValid={isValid} />
+      <StepProcess
+        steps={steps}
+        isValid={isValid}
+        isDone={isDetail}
+        isEdit={isEdit}
+      />
     </form>
   );
 };

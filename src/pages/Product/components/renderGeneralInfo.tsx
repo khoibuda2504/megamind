@@ -1,9 +1,12 @@
 import { ControllerField } from "@/components";
-import { genderList } from "@/utilities/constants";
+import { FieldType, genderList } from "@/utilities/constants";
 import { Col, DatePicker, Input, Select } from "antd";
-import { Control, FieldValues } from "react-hook-form";
+import { Control } from "react-hook-form";
 
-const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
+const renderGeneralInfo = (
+  control: Control<any>,
+  isDetail: boolean = false
+) => {
   return (
     <>
       <Col xs={24} md={8}>
@@ -13,6 +16,7 @@ const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
           label="Full name"
           rules={{ required: true }}
           component={Input}
+          componentProps={{ disabled: isDetail }}
         />
       </Col>
       <Col xs={24} md={8}>
@@ -22,9 +26,10 @@ const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
           label="Date of Birth"
           rules={{ required: true }}
           component={DatePicker}
+          fieldType={FieldType.DATE}
           componentProps={{
             className: "w-full",
-            isDate: true,
+            disabled: isDetail,
           }}
         />
       </Col>
@@ -38,6 +43,7 @@ const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
           componentProps={{
             className: "w-full",
             options: genderList,
+            disabled: isDetail,
           }}
         />
       </Col>
@@ -48,6 +54,7 @@ const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
           label="ID/Passport Number"
           rules={{ required: true }}
           component={Input}
+          componentProps={{ disabled: isDetail }}
         />
       </Col>
       <Col xs={24} md={8}>
@@ -57,7 +64,11 @@ const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
           label="Date of Issue"
           rules={{ required: true }}
           component={DatePicker}
-          componentProps={{ className: "w-full", isDate: true }}
+          fieldType={FieldType.DATE}
+          componentProps={{
+            className: "w-full",
+            disabled: isDetail,
+          }}
         />
       </Col>
       <Col xs={24} md={8}>
@@ -67,6 +78,7 @@ const renderGeneralInfo = <T extends FieldValues>(control: Control<T, any>) => {
           label="Place of Issue"
           rules={{ required: true }}
           component={Input}
+          componentProps={{ disabled: isDetail }}
         />
       </Col>
     </>

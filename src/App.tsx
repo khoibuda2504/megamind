@@ -3,7 +3,7 @@ import { LoginPage } from "@/pages";
 import * as PATH from "@/configs/routesConfig";
 import { ProtectedRoute, PageNotFound } from "@/components";
 import { productBuildRoute } from "@/routes";
-import { SlideModal } from "@/components";
+import { UIDrawer } from "@/components/Drawer";
 function App() {
   return (
     <>
@@ -23,7 +23,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
-      <SlideModal />
+      <UIDrawer />
     </>
   );
 }

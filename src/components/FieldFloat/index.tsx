@@ -9,7 +9,7 @@ const FieldFloat = ({
 }) => {
   return (
     <div className="relative">
-      <label className="label-float">{textFloat}</label>
+      <label className="absolute top-[-7px] left-[7px] z-10 text-[11px] px-[6px] text-gray-400 bg-white">{textFloat}</label>
       {children}
     </div>
   );

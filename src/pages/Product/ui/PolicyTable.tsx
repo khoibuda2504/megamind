@@ -1,10 +1,20 @@
 import { useModalStore } from "@/store";
-import { PolicyType } from "@/types/policy";
+import { PolicyType } from "../types";
 import { parseCurrency, parseUTC } from "@/utilities/helpers";
 import { Table } from "antd";
 import PolicyForm from "./PolicyForm";
 
-const PolicyTable = ({ policies, onResponse }: { policies: PolicyType[], onResponse: (data: PolicyType) => void }) => {
+type PolicyTableType = {
+  policies: PolicyType[];
+  onResponse: (data: PolicyType) => void;
+  isDone: boolean;
+};
+
+const PolicyTable = ({
+  policies,
+  onResponse,
+  isDone = false,
+}: PolicyTableType) => {
   const { openModal } = useModalStore();
   const columns = [
     {
@@ -25,7 +35,7 @@ const PolicyTable = ({ policies, onResponse }: { policies: PolicyType[], onRespo
             openModal(
               <PolicyForm
                 onResponse={onResponse}
-                isEdit
+                {...(isDone ? { isDetail: true } : { isEdit: true })}
                 initialData={record}
               />
             );
@@ -80,12 +90,14 @@ const PolicyTable = ({ policies, onResponse }: { policies: PolicyType[], onRespo
     },
   ];
   return (
-    <Table
-      rowKey="id"
-      dataSource={policies}
-      columns={columns}
-      pagination={false}
-    />
+    <div className="overflow-auto">
+      <Table
+        rowKey="id"
+        dataSource={policies}
+        columns={columns}
+        pagination={false}
+      />
+    </div>
   );
 };
 

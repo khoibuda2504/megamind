@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-interface ModalState {
+interface IModalState {
   isModalOpen: boolean;
   openModal: (content: React.ReactNode) => void;
   content: React.ReactNode;
   closeModal: () => void
 }
 
-const useModalStore = create<ModalState>((set) => ({
+const useModalStore = create<IModalState>((set) => ({
   isModalOpen: false,
   content: null,
   openModal: (content: React.ReactNode) => set({ isModalOpen: true, content }),

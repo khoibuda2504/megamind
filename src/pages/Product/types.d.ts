@@ -1,4 +1,5 @@
 import { Gender, InsurancePackage, Relationship } from "@/utilities/constants";
+import { Dayjs } from "dayjs";
 
 type GeneralType = {
   fullName: string;
@@ -25,4 +26,6 @@ export type PolicyType = GeneralType & {
 export type ProductType = {
   policies: PolicyType[];
   buyerInfo: BuyerType;
+  isDone: boolean;
+  createdAt: string;
 };

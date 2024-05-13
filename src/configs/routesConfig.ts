@@ -4,7 +4,7 @@ export const APP_PATH = "/";
 export const LOGIN_PATH = "/login";
 
 // Product Build Service
-export const PRODUCT_PATH = "/products";
+export const PRODUCT_PATH = "/product";
 
 //Admin Service
 export const ADMIN_PATH = "/admin";
