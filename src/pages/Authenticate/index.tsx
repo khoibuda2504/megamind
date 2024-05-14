@@ -9,6 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!isAuthenticated) return;
+    // prevent user go back
     navigate(location.state.from, { replace: true });
   }, [isAuthenticated]);
   return (

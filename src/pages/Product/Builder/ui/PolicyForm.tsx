@@ -12,7 +12,7 @@ import {
 } from "@/utilities/constants";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ControllerField } from "@/components";
-import { renderGeneralInfo } from "../components";
+import { GeneralInfoField } from "../components";
 import { InsuredObjectType } from "../types";
 import { mapData } from "../utils";
 import { useModalStore } from "@/store";
@@ -58,7 +58,7 @@ const PolicyForm = ({
         <Card>
           <h4 className="primary-title">General Information</h4>
           <Row gutter={[16, 16]}>
-            {renderGeneralInfo(control, isDetail)}
+          <GeneralInfoField control={control} isDetail={isDetail} />
             <Col xs={24} md={8}>
               <ControllerField
                 control={control}

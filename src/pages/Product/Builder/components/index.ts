@@ -1,1 +1,1 @@
-export {default as renderGeneralInfo} from './renderGeneralInfo'
+export {default as GeneralInfoField} from './GeneralInfoField'

@@ -1,5 +1,5 @@
 import { Button, Card, Col, Input, Row, Space } from "antd";
-import { BuyerForm, PolicyTable, PolicyForm } from "./UI";
+import { BuyerForm, PolicyTable, PolicyForm } from "./ui";
 import { useModalStore } from "@/store";
 import { StepProcess } from "@/components";
 import { parseCurrency, parseUTC } from "@/utilities/helpers";
@@ -27,7 +27,7 @@ const Product = () => {
     mode: "onBlur",
   });
   const isDone = !!product.createdAt;
-  const finalFee = useMemo(() => {
+  const totalFee = useMemo(() => {
     return product.insurances?.map((p) => p.fee).reduce((a, b) => a + b, 0);
   }, [JSON.stringify(product?.insurances)]);
   const [searchValue, setSearchValue] = useState("");
@@ -108,13 +108,14 @@ const Product = () => {
               "New Insurance Policy Registration Successfully!!!"
             </p>
             <span className="text-xs">
-              Total fee of the policy is: <b>{parseCurrency(finalFee)}</b>
+              Total fee of the policy is: <b>{parseCurrency(totalFee)}</b>
             </span>
           </div>
         </div>
       ),
     },
   ];
+  // callback function to handle disabled next button
   const cbIsValid = useCallback(
     (current: number) => {
       if (current === 0) {
@@ -125,6 +126,7 @@ const Product = () => {
     },
     [product?.insurances?.length, isValid]
   );
+  // callback function to action next button
   const cbIsOnNext = useCallback(
     (current: number) => {
       if (current === 0) {
@@ -171,10 +173,10 @@ const Product = () => {
               <b>Creation Date: </b>
               {parseUTC(product.createdAt ? dayjs(product.createdAt) : dayjs())}
             </p>
-            {finalFee && (
+            {totalFee && (
               <p>
                 <b>Fee: </b>
-                {parseCurrency(finalFee)}
+                {parseCurrency(totalFee)}
               </p>
             )}
           </Card>

@@ -1,21 +1,20 @@
 import { ControllerField } from "@/components";
 import { Col, Input, Row } from "antd";
-import { renderGeneralInfo } from "../components";
+import { GeneralInfoField } from "../components";
 import { Control } from "react-hook-form";
-import { BuyerType } from "../types";
 
 const BuyerForm = ({
   control,
   isDetail = false,
 }: {
-  control: Control<BuyerType, any>;
+  control: Control<any>;
   isDetail?: boolean;
 }) => {
   return (
     <div>
       <h4 className="primary-title">General Information</h4>
       <Row gutter={[16, 16]}>
-        {renderGeneralInfo(control, isDetail)}
+        <GeneralInfoField control={control} isDetail={isDetail} />
         <Col xs={24}>
           <ControllerField
             control={control}

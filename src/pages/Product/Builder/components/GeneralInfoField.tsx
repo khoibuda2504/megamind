@@ -4,11 +4,12 @@ import { disabledFutureDate, noSpecialCharRegex } from "@/utilities/helpers";
 import { Col, DatePicker, Input, Select } from "antd";
 import { Control } from "react-hook-form";
 
-// reusable UI for BuyerForm and PolicyForm
-const renderGeneralInfo = (
-  control: Control<any>,
-  isDetail: boolean = false
-) => {
+interface IGeneralInfoField {
+  control: Control<any>;
+  isDetail?: boolean;
+}
+
+const GeneralInfoField = ({ control, isDetail }: IGeneralInfoField) => {
   return (
     <>
       <Col xs={24} md={8}>
@@ -35,7 +36,7 @@ const renderGeneralInfo = (
           componentProps={{
             className: "w-full",
             disabled: isDetail,
-            disabledFutureDate,
+            disabledDate: disabledFutureDate,
           }}
         />
       </Col>
@@ -74,7 +75,7 @@ const renderGeneralInfo = (
           componentProps={{
             className: "w-full",
             disabled: isDetail,
-            disabledFutureDate,
+            disabledDate: disabledFutureDate,
           }}
         />
       </Col>
@@ -92,4 +93,4 @@ const renderGeneralInfo = (
   );
 };
 
-export default renderGeneralInfo;
+export default GeneralInfoField;
