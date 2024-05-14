@@ -90,7 +90,7 @@ const PolicyTable = ({
     },
   ];
   return (
-    <div className="overflow-auto">
+    <div className="overflow-auto shadow">
       <Table
         rowKey="id"
         dataSource={policies}

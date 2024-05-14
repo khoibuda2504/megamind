@@ -1,7 +1,10 @@
 import { UICheckbox } from "@/components/Checkbox";
 import StepProcess from "@/components/StepProcess";
-import { parseCurrency } from "@/utilities/helpers";
-import { Card, Checkbox, Col, DatePicker, Row, Select } from "antd";
+import {
+  isStartDateGreaterThanEndDate,
+  parseCurrency,
+} from "@/utilities/helpers";
+import { Card, Checkbox, Col, DatePicker, Row, Select, message } from "antd";
 import {
   relationshipList,
   insurancePackageList,
@@ -11,7 +14,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ControllerField } from "@/components";
 import { renderGeneralInfo } from "../components";
 import { PolicyType } from "../types";
-import { mapData } from "../mapData"
+import { mapData } from "../mapData";
 import { useModalStore } from "@/store";
 
 interface IPolicyForm {
@@ -41,6 +44,10 @@ const PolicyForm = ({
   });
   const { closeModal } = useModalStore();
   const onSubmit: SubmitHandler<PolicyType> = (data) => {
+    if (isStartDateGreaterThanEndDate(data.startDate, data.endDate)) {
+      message.warning("Start date cannot be greater than end date");
+      return;
+    }
     onResponse(mapData(data, isEdit));
     closeModal();
   };

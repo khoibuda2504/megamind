@@ -1,5 +1,6 @@
 import { ControllerField } from "@/components";
 import { FieldType, genderList } from "@/utilities/constants";
+import { disabledDate } from "@/utilities/helpers";
 import { Col, DatePicker, Input, Select } from "antd";
 import { Control } from "react-hook-form";
 
@@ -30,6 +31,7 @@ const renderGeneralInfo = (
           componentProps={{
             className: "w-full",
             disabled: isDetail,
+            disabledDate
           }}
         />
       </Col>
@@ -68,6 +70,7 @@ const renderGeneralInfo = (
           componentProps={{
             className: "w-full",
             disabled: isDetail,
+            disabledDate
           }}
         />
       </Col>
