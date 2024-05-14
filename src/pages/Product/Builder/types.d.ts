@@ -5,7 +5,7 @@ type GeneralType = {
   fullName: string;
   dateOfBirth: string;
   gender: Gender;
-  idOrPassportNo: number;
+  idOrPassportNo: string;
   dateOfIssue: string;
   placeOfIssue: string;
 };

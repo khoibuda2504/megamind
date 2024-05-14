@@ -3,6 +3,7 @@ import { DateType } from "@/types/Date";
 import dayjs from "dayjs";
 
 export const parseUTC = (date: DateType, format = null) => {
+  // parse date to formatted date, default "YYYY/MM/DD"
   if (!date) return "";
   return dayjs(date).format(format ?? formattedDate);
 };
@@ -26,7 +27,8 @@ export const calculateAge = (birthDate: DateType): number => {
 
   return age;
 };
-export const disabledDate = (currentDate: dayjs.Dayjs) => {
+export const disabledFutureDate = (currentDate: dayjs.Dayjs) => {
+  // used to disable future date
   const today = dayjs();
   const currentDateJs = dayjs.isDayjs(currentDate)
     ? currentDate

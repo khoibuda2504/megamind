@@ -1,9 +1,10 @@
 import { ControllerField } from "@/components";
 import { FieldType, genderList } from "@/utilities/constants";
-import { disabledDate, noSpecialCharRegex } from "@/utilities/helpers";
-import { Col, DatePicker, Input, InputNumber, Select } from "antd";
+import { disabledFutureDate, noSpecialCharRegex } from "@/utilities/helpers";
+import { Col, DatePicker, Input, Select } from "antd";
 import { Control } from "react-hook-form";
 
+// reusable UI for BuyerForm and PolicyForm
 const renderGeneralInfo = (
   control: Control<any>,
   isDetail: boolean = false
@@ -34,7 +35,7 @@ const renderGeneralInfo = (
           componentProps={{
             className: "w-full",
             disabled: isDetail,
-            disabledDate,
+            disabledFutureDate,
           }}
         />
       </Col>
@@ -58,7 +59,7 @@ const renderGeneralInfo = (
           name="idOrPassportNo"
           label="ID/Passport Number"
           rules={{ required: true }}
-          component={InputNumber}
+          component={Input}
           componentProps={{ disabled: isDetail }}
         />
       </Col>
@@ -73,7 +74,7 @@ const renderGeneralInfo = (
           componentProps={{
             className: "w-full",
             disabled: isDetail,
-            disabledDate,
+            disabledFutureDate,
           }}
         />
       </Col>
