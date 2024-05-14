@@ -1,17 +1,18 @@
 import { useModalStore } from "@/store";
-import { PolicyType } from "../types";
-import { parseCurrency, parseUTC } from "@/utilities/helpers";
+import { InsuredObjectType } from "../types";
+import { calculateAge, parseCurrency, parseUTC } from "@/utilities/helpers";
 import { Table } from "antd";
 import PolicyForm from "./PolicyForm";
+import { DateType } from "@/types/Date";
 
 type PolicyTableType = {
-  policies: PolicyType[];
-  onResponse: (data: PolicyType) => void;
+  insurances: InsuredObjectType[];
+  onResponse: (data: InsuredObjectType) => void;
   isDone: boolean;
 };
 
 const PolicyTable = ({
-  policies,
+  insurances,
   onResponse,
   isDone = false,
 }: PolicyTableType) => {
@@ -19,16 +20,16 @@ const PolicyTable = ({
   const columns = [
     {
       title: "No.",
-      key: "id",
-      dataIndex: "id",
+      key: "identity",
+      dataIndex: "identity",
       //@ts-ignore
-      render: (v: string, record: PolicyType, idx: number) => idx + 1,
+      render: (v: string, record: InsuredObjectType, idx: number) => idx + 1,
     },
     {
       title: "Full Name",
       dataIndex: "fullName",
       key: "fullName",
-      render: (v: string, record: PolicyType) => (
+      render: (v: string, record: InsuredObjectType) => (
         <div
           className="cursor-pointer"
           onClick={() => {
@@ -47,13 +48,14 @@ const PolicyTable = ({
     },
     {
       title: "ID/Passport Number",
-      dataIndex: "idNumber",
-      key: "idNumber",
+      dataIndex: "idOrPassportNo",
+      key: "idOrPassportNo",
     },
     {
       title: "Age",
-      dataIndex: "age",
+      dataIndex: "dateOfBirth",
       key: "age",
+      render: (dateOfBirth: DateType) => calculateAge(dateOfBirth),
     },
     {
       title: "Gender",
@@ -92,8 +94,8 @@ const PolicyTable = ({
   return (
     <div className="overflow-auto shadow">
       <Table
-        rowKey="id"
-        dataSource={policies}
+        rowKey="identity"
+        dataSource={insurances}
         columns={columns}
         pagination={false}
       />

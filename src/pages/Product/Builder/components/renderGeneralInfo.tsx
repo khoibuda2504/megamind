@@ -1,7 +1,7 @@
 import { ControllerField } from "@/components";
 import { FieldType, genderList } from "@/utilities/constants";
-import { disabledDate } from "@/utilities/helpers";
-import { Col, DatePicker, Input, Select } from "antd";
+import { disabledDate, noSpecialCharRegex } from "@/utilities/helpers";
+import { Col, DatePicker, Input, InputNumber, Select } from "antd";
 import { Control } from "react-hook-form";
 
 const renderGeneralInfo = (
@@ -15,7 +15,10 @@ const renderGeneralInfo = (
           control={control}
           name="fullName"
           label="Full name"
-          rules={{ required: true }}
+          rules={{
+            required: true,
+            pattern: { value: noSpecialCharRegex },
+          }}
           component={Input}
           componentProps={{ disabled: isDetail }}
         />
@@ -31,7 +34,7 @@ const renderGeneralInfo = (
           componentProps={{
             className: "w-full",
             disabled: isDetail,
-            disabledDate
+            disabledDate,
           }}
         />
       </Col>
@@ -52,10 +55,10 @@ const renderGeneralInfo = (
       <Col xs={24} md={8}>
         <ControllerField
           control={control}
-          name="idNumber"
+          name="idOrPassportNo"
           label="ID/Passport Number"
           rules={{ required: true }}
-          component={Input}
+          component={InputNumber}
           componentProps={{ disabled: isDetail }}
         />
       </Col>
@@ -70,7 +73,7 @@ const renderGeneralInfo = (
           componentProps={{
             className: "w-full",
             disabled: isDetail,
-            disabledDate
+            disabledDate,
           }}
         />
       </Col>

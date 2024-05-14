@@ -5,26 +5,26 @@ type GeneralType = {
   fullName: string;
   dateOfBirth: string;
   gender: Gender;
-  idNumber: string;
+  idOrPassportNo: number;
   dateOfIssue: string;
   placeOfIssue: string;
 };
 type BuyerType = {
   address: string;
 } & GeneralType;
-export type PolicyType = GeneralType & {
-  id: string;
+export type InsuredObjectType = GeneralType & {
+  identity: string;
   age: number;
   relationship: Relationship;
   insurancePackage: InsurancePackage;
   startDate: string;
   endDate: string;
-  outPatient: boolean;
-  dental: boolean;
+  isOutPatient: boolean;
+  isDental: boolean;
   fee: number;
 };
 export type ProductType = {
-  policies: PolicyType[];
+  insurances: InsuredObjectType[];
   buyerInfo: BuyerType;
   isDone: boolean;
   createdAt: string;

@@ -1,5 +1,5 @@
 import { UICheckbox } from "@/components/Checkbox";
-import StepProcess from "@/components/StepProcess";
+import { StepProcess } from "@/components/";
 import {
   isStartDateGreaterThanEndDate,
   parseCurrency,
@@ -13,15 +13,15 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ControllerField } from "@/components";
 import { renderGeneralInfo } from "../components";
-import { PolicyType } from "../types";
-import { mapData } from "../mapData";
+import { InsuredObjectType } from "../types";
+import { mapData } from "../utils";
 import { useModalStore } from "@/store";
 
 interface IPolicyForm {
-  onResponse: (data: PolicyType) => void;
+  onResponse: (data: InsuredObjectType) => void;
   isEdit?: boolean;
   isDetail?: boolean;
-  initialData?: PolicyType;
+  initialData?: InsuredObjectType;
 }
 
 const PolicyForm = ({
@@ -34,7 +34,7 @@ const PolicyForm = ({
     handleSubmit,
     control,
     formState: { isValid },
-  } = useForm<PolicyType>({
+  } = useForm<InsuredObjectType>({
     mode: "onBlur",
     ...(isDetail || isEdit
       ? {
@@ -43,7 +43,7 @@ const PolicyForm = ({
       : {}),
   });
   const { closeModal } = useModalStore();
-  const onSubmit: SubmitHandler<PolicyType> = (data) => {
+  const onSubmit: SubmitHandler<InsuredObjectType> = (data) => {
     if (isStartDateGreaterThanEndDate(data.startDate, data.endDate)) {
       message.warning("Start date cannot be greater than end date");
       return;
@@ -146,7 +146,7 @@ const PolicyForm = ({
           <h4 className="primary-title mt-2">Additional Insurance Benefits</h4>
           <ControllerField
             control={control}
-            name="outPatient"
+            name="isOutPatient"
             component={Checkbox}
             fieldType={FieldType.CHECKBOX}
             componentProps={{
@@ -159,7 +159,7 @@ const PolicyForm = ({
           </ControllerField>
           <ControllerField
             control={control}
-            name="dental"
+            name="isDental"
             component={Checkbox}
             fieldType={FieldType.CHECKBOX}
             componentProps={{

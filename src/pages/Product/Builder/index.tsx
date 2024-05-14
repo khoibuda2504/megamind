@@ -1,7 +1,7 @@
 import { Button, Card, Col, Input, Row, Space } from "antd";
-import { BuyerForm, PolicyTable, PolicyForm } from "./ui";
+import { BuyerForm, PolicyTable, PolicyForm } from "./UI";
 import { useModalStore } from "@/store";
-import StepProcess from "@/components/StepProcess";
+import { StepProcess } from "@/components";
 import { parseCurrency, parseUTC } from "@/utilities/helpers";
 import { FieldFloat } from "@/components";
 import { useForm } from "react-hook-form";
@@ -28,15 +28,16 @@ const Product = () => {
   });
   const isDone = !!product.createdAt;
   const finalFee = useMemo(() => {
-    return product.policies?.map((p) => p.fee).reduce((a, b) => a + b, 0);
-  }, [JSON.stringify(product?.policies)]);
+    return product.insurances?.map((p) => p.fee).reduce((a, b) => a + b, 0);
+  }, [JSON.stringify(product?.insurances)]);
   const [searchValue, setSearchValue] = useState("");
-  const filteredPolicies =
-    useMemo(() => {
-      return product?.policies?.filter((p) =>
+  const filteredInsurances = useMemo(() => {
+    return (
+      product?.insurances?.filter((p) =>
         p.fullName.toLowerCase().includes(searchValue.toLowerCase())
-      );
-    }, [JSON.stringify(product?.policies), searchValue]) ?? [];
+      ) ?? []
+    );
+  }, [JSON.stringify(product?.insurances), searchValue]);
   const steps = [
     {
       title: "Insured Objects",
@@ -60,7 +61,7 @@ const Product = () => {
                       onResponse={(data) => {
                         setProduct((prev) => ({
                           ...prev,
-                          policies: [...(prev.policies ?? []), data],
+                          insurances: [...(prev.insurances ?? []), data],
                         }));
                       }}
                     />
@@ -73,14 +74,14 @@ const Product = () => {
           </Space>
           <div>
             <PolicyTable
-              policies={filteredPolicies}
+              insurances={filteredInsurances}
               isDone={isDone}
               onResponse={(data) => {
                 setProduct((prev) => {
                   return {
                     ...prev,
-                    policies: prev.policies?.map((p) => {
-                      if (p.id === data.id) {
+                    insurances: prev.insurances?.map((p) => {
+                      if (p.identity === data.identity) {
                         return data;
                       }
                       return p;
@@ -117,12 +118,12 @@ const Product = () => {
   const cbIsValid = useCallback(
     (current: number) => {
       if (current === 0) {
-        const length = product?.policies?.length ?? 0;
+        const length = product?.insurances?.length ?? 0;
         return length > 0;
       }
       return isValid;
     },
-    [product?.policies?.length, isValid]
+    [product?.insurances?.length, isValid]
   );
   const cbIsOnNext = useCallback(
     (current: number) => {
@@ -163,7 +164,7 @@ const Product = () => {
           />
         </form>
       </Col>
-      {!!product?.policies?.length && (
+      {!!product?.insurances?.length && (
         <Col xs={24} xl={6}>
           <Card title="Summary">
             <p>

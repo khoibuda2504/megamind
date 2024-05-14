@@ -1,14 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { NavBarMenu } from "@/components/index";
+import { SideMenu } from "@/components/index";
 import { useAuthStore } from "@/store";
 
 const ProtectedRoute = () => {
   const { isAuthenticated } = useAuthStore();
   return isAuthenticated ? (
     <>
-      <NavBarMenu>
+      <SideMenu>
         <Outlet />
-      </NavBarMenu>
+      </SideMenu>
     </>
   ) : (
     <Navigate to="/login" state={{ from: window.location.pathname }} />
