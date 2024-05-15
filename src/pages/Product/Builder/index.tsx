@@ -139,7 +139,8 @@ const Product = () => {
           );
         }
       }
-      if (current === 1) {
+      // prestep
+      if (current === steps.length - 2) {
         handleSubmit((buyerInfo) => {
           setProduct((prev) => {
             return {
